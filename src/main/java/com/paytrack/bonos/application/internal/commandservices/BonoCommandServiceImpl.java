@@ -28,7 +28,8 @@ public class BonoCommandServiceImpl implements BonoCommandService {
                 command.tea(),
                 command.numeroPeriodos(),
                 command.plazoGracia(),
-                command.fechaInicio()
+                command.fechaInicio(),
+                command.usuarioId()
         );
 
         Bono guardado = bonoRepository.save(bono);

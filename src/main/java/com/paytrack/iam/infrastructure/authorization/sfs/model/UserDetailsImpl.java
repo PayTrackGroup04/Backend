@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 public class UserDetailsImpl implements UserDetails {
+    private final Long id;
     private final String username;
     @JsonIgnore
     private final String password;
@@ -21,7 +22,8 @@ public class UserDetailsImpl implements UserDetails {
     private final boolean credentialsNonExpired;
     private final boolean enabled;
 
-    public UserDetailsImpl(String username, String password) {
+    public UserDetailsImpl(Long id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.accountNonExpired = true;
@@ -31,11 +33,15 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public static UserDetailsImpl build(User user) {
-        return new UserDetailsImpl(user.getUsername(), user.getPassword());
+        return new UserDetailsImpl(user.getId(), user.getUsername(), user.getPassword());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
+    }
+
+    public Long getId() {
+        return this.id;
     }
 }

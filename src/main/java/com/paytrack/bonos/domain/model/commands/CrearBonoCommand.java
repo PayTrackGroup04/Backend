@@ -5,7 +5,7 @@ import com.paytrack.bonos.domain.model.valueobjects.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record CrearBonoCommand(Dinero precioVenta, BigDecimal porcentajeCuotaInicial, Dinero prestamo, FrecuenciaPago frecuenciaPago, PeriodoTiempo plazo, TasaInteres tea, int numeroPeriodos, PlazoGracia plazoGracia, LocalDate fechaInicio) {
+public record CrearBonoCommand(Dinero precioVenta, BigDecimal porcentajeCuotaInicial, Dinero prestamo, FrecuenciaPago frecuenciaPago, PeriodoTiempo plazo, TasaInteres tea, int numeroPeriodos, PlazoGracia plazoGracia, LocalDate fechaInicio, Long usuarioId) {
 
     public CrearBonoCommand {
         if (precioVenta == null || porcentajeCuotaInicial == null || prestamo == null ||
@@ -21,6 +21,10 @@ public record CrearBonoCommand(Dinero precioVenta, BigDecimal porcentajeCuotaIni
 
         if (numeroPeriodos <= 0) {
             throw new IllegalArgumentException("El número de periodos debe ser mayor que 0");
+        }
+
+        if (usuarioId == null || usuarioId <= 0) {
+            throw new IllegalArgumentException("usuarioId inválido");
         }
     }
 

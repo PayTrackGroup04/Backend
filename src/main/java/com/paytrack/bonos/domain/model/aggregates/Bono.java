@@ -13,6 +13,9 @@ public class Bono {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "usuario_id", nullable = false)
+    private Long usuarioId;
+
     @Embedded
     private Dinero precioVenta;
 
@@ -61,7 +64,8 @@ public class Bono {
             TasaInteres tea,
             int numeroPeriodos,
             PlazoGracia plazoGracia,
-            LocalDate fechaInicio
+            LocalDate fechaInicio,
+            Long usuarioId
     ) {
         this.precioVenta = precioVenta;
         this.porcentajeCuotaInicial = porcentajeCuotaInicial;
@@ -72,6 +76,7 @@ public class Bono {
         this.numeroPeriodos = numeroPeriodos;
         this.plazoGracia = plazoGracia;
         this.fechaInicio = fechaInicio;
+        this.usuarioId = usuarioId;
     }
 
     public Long getId() {
@@ -112,6 +117,10 @@ public class Bono {
 
     public LocalDate getFechaInicio() {
         return fechaInicio;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
 }

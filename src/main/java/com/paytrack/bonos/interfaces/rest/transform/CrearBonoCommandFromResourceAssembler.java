@@ -8,7 +8,7 @@ import com.paytrack.bonos.domain.model.valueobjects.TasaInteres;
 import com.paytrack.bonos.interfaces.rest.resources.CrearBonoResource;
 
 public class CrearBonoCommandFromResourceAssembler {
-    public static CrearBonoCommand toCommandFromResource(CrearBonoResource resource) {
+    public static CrearBonoCommand toCommandFromResource(CrearBonoResource resource, Long usuarioid) {
         return new CrearBonoCommand(
                 new Dinero(resource.precioVentaMonto(), resource.precioVentaMoneda()),
                 resource.porcentajeCuotaInicial(),
@@ -21,7 +21,8 @@ public class CrearBonoCommandFromResourceAssembler {
                         resource.tipoPlazoGracia(),
                         new PeriodoTiempo(resource.duracionGraciaValor(), resource.duracionGraciaUnidad())
                 ),
-                resource.fechaInicio()
+                resource.fechaInicio(),
+                usuarioid
         );
     }
 }

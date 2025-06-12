@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 public record BonoResource(
         Long id,
+        Long usuarioId,
         BigDecimal precioVentaMonto,
         TipoMoneda precioVentaMoneda,
         BigDecimal porcentajeCuotaInicial,

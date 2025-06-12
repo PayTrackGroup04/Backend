@@ -26,4 +26,10 @@ public class BonoQueryServiceImpl implements BonoQueryService {
     public List<Bono> getAll() {
         return bonoRepository.findAll();
     }
+
+    @Override
+    public List<Bono> getByUsuarioId(Long usuarioId) {
+        return bonoRepository.findByUsuarioId(usuarioId);
+    }
+
 }

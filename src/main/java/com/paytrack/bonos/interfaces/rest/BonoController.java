@@ -7,9 +7,12 @@ import com.paytrack.bonos.interfaces.rest.resources.BonoResource;
 import com.paytrack.bonos.interfaces.rest.resources.CrearBonoResource;
 import com.paytrack.bonos.interfaces.rest.transform.BonoResourceFromEntityAssembler;
 import com.paytrack.bonos.interfaces.rest.transform.CrearBonoCommandFromResourceAssembler;
+import com.paytrack.iam.infrastructure.authorization.sfs.model.UserDetailsImpl;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,9 +29,25 @@ public class BonoController {
 
 
     // Crear bono
+    //@PostMapping
+    //public ResponseEntity<BonoResource> crear(@RequestBody CrearBonoResource resource) {
+    //    var command = CrearBonoCommandFromResourceAssembler.toCommandFromResource(resource);
+    //    Optional<Bono> resultado = bonoCommandService.handle(command);
+//
+    //    return resultado
+    //            .map(BonoResourceFromEntityAssembler::toResourceFromEntity)
+    //            .map(ResponseEntity::ok)
+    //            .orElse(ResponseEntity.badRequest().build());
+    //}
+//
     @PostMapping
-    public ResponseEntity<BonoResource> crear(@RequestBody CrearBonoResource resource) {
-        var command = CrearBonoCommandFromResourceAssembler.toCommandFromResource(resource);
+    public ResponseEntity<BonoResource> crear(
+            @RequestBody CrearBonoResource resource,
+            @AuthenticationPrincipal UserDetailsImpl usuarioAutenticado
+    ) {
+        Long usuarioId = usuarioAutenticado.getId(); // ID seguro desde sesión
+
+        var command = CrearBonoCommandFromResourceAssembler.toCommandFromResource(resource, usuarioId);
         Optional<Bono> resultado = bonoCommandService.handle(command);
 
         return resultado
@@ -46,6 +65,15 @@ public class BonoController {
                 .map(BonoResourceFromEntityAssembler::toResourceFromEntity)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/usuario/{usuarioId}")
+    public ResponseEntity<List<BonoResource>> obtenerPorUsuario(@PathVariable Long usuarioId) {
+        var bonos = bonoQueryService.getByUsuarioId(usuarioId);
+        var resources = bonos.stream()
+                .map(BonoResourceFromEntityAssembler::toResourceFromEntity)
+                .toList();
+        return ResponseEntity.ok(resources);
     }
 
 }

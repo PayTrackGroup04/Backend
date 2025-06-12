@@ -7,6 +7,7 @@ public class BonoResourceFromEntityAssembler {
     public static BonoResource toResourceFromEntity(Bono bono) {
         return new BonoResource(
                 bono.getId(),
+                bono.getUsuarioId(),
                 bono.getPrecioVenta().getMonto(),
                 bono.getPrecioVenta().getMoneda(),
                 bono.getPorcentajeCuotaInicial(),

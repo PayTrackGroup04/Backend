@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface BonoRepository extends JpaRepository<Bono, Long> {
     Optional<Bono> findById(Long id);
     List<Bono> findAll();
+    List<Bono> findByUsuarioId(Long usuarioId);
+
 }
