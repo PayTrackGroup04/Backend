@@ -1,4 +1,4 @@
-package com.bonos;
+package com.paytrack.bonos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
