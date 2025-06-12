@@ -41,6 +41,11 @@ public class Bono {
     private int numeroPeriodos;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "duracion.valor", column = @Column(name = "gracia_valor")),
+            @AttributeOverride(name = "duracion.unidad", column = @Column(name = "gracia_unidad")),
+            @AttributeOverride(name = "tipo", column = @Column(name = "gracia_tipo"))
+    })
     private PlazoGracia plazoGracia;
 
     private LocalDate fechaInicio;

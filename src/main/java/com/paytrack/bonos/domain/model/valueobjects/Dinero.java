@@ -14,7 +14,7 @@ public class Dinero {
     @Enumerated(EnumType.STRING)
     private TipoMoneda moneda;
 
-    public Dinero() {}
+    protected Dinero() {}
 
     public Dinero(BigDecimal monto, TipoMoneda moneda) {
         if (monto == null || monto.compareTo(BigDecimal.ZERO) < 0) {
