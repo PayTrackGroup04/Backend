@@ -101,6 +101,41 @@ public class Bono {
         this.moneda = moneda;
     }
 
+    public void actualizar(
+            BigDecimal valorNominal,
+            BigDecimal tasaCupon,
+            TipoTasa tipoTasa,
+            Capitalizacion capitalizacion,
+            FrecuenciaPago frecuenciaPago,
+            int plazoAnios,
+            int graciaTotal,
+            int graciaParcial,
+            LocalDate fechaEmision,
+            int numeroDiasPorAno,
+            BigDecimal cavali,
+            BigDecimal estructuracion,
+            BigDecimal colocacion,
+            MetodoAmortizacion metodoAmortizacion,
+            TipoMoneda moneda
+    ) {
+        this.valorNominal = valorNominal;
+        this.tasaCupon = tasaCupon;
+        this.tipoTasa = tipoTasa;
+        this.capitalizacion = capitalizacion;
+        this.frecuenciaPago = frecuenciaPago;
+        this.plazoAnios = plazoAnios;
+        this.graciaTotal = graciaTotal;
+        this.graciaParcial = graciaParcial;
+        this.fechaEmision = fechaEmision;
+        this.numeroDiasPorAno = numeroDiasPorAno;
+        this.cavali = cavali;
+        this.estructuracion = estructuracion;
+        this.colocacion = colocacion;
+        this.metodoAmortizacion = metodoAmortizacion;
+        this.moneda = moneda;
+    }
+
+
     // Getters
     public Long getId() { return id; }
     public Long getUsuarioId() { return usuarioId; }

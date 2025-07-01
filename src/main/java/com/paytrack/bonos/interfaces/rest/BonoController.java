@@ -3,8 +3,10 @@ package com.paytrack.bonos.interfaces.rest;
 import com.paytrack.bonos.domain.model.aggregates.Bono;
 import com.paytrack.bonos.domain.services.BonoCommandService;
 import com.paytrack.bonos.domain.services.BonoQueryService;
+import com.paytrack.bonos.interfaces.rest.resources.ActualizarBonoResource;
 import com.paytrack.bonos.interfaces.rest.resources.BonoResource;
 import com.paytrack.bonos.interfaces.rest.resources.CrearBonoResource;
+import com.paytrack.bonos.interfaces.rest.transform.ActualizarBonoCommandFromResourceAssembler;
 import com.paytrack.bonos.interfaces.rest.transform.BonoResourceFromEntityAssembler;
 import com.paytrack.bonos.interfaces.rest.transform.CrearBonoCommandFromResourceAssembler;
 import com.paytrack.iam.infrastructure.authorization.sfs.model.UserDetailsImpl;
@@ -75,5 +77,19 @@ public class BonoController {
                 .toList();
         return ResponseEntity.ok(resources);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BonoResource> actualizar(
+            @PathVariable Long id,
+            @RequestBody ActualizarBonoResource resource,
+            @AuthenticationPrincipal UserDetailsImpl usuario
+    ) {
+        var command = ActualizarBonoCommandFromResourceAssembler.toCommandFromResource(id, usuario.getId(), resource);
+        return bonoCommandService.handleUpdate(command)
+                .map(BonoResourceFromEntityAssembler::toResourceFromEntity)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.badRequest().build());
+    }
+
 
 }

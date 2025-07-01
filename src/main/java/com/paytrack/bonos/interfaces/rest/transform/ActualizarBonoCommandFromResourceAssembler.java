@@ -1,12 +1,15 @@
 package com.paytrack.bonos.interfaces.rest.transform;
 
-import com.paytrack.bonos.domain.model.commands.CrearBonoCommand;
-import com.paytrack.bonos.interfaces.rest.resources.CrearBonoResource;
+import com.paytrack.bonos.domain.model.commands.ActualizarBonoCommand;
+import com.paytrack.bonos.interfaces.rest.resources.ActualizarBonoResource;
 
-public class CrearBonoCommandFromResourceAssembler {
+public class ActualizarBonoCommandFromResourceAssembler {
 
-    public static CrearBonoCommand toCommandFromResource(CrearBonoResource resource, Long usuarioId) {
-        return new CrearBonoCommand(
+    public static ActualizarBonoCommand toCommandFromResource(
+            Long bonoId, Long usuarioId, ActualizarBonoResource resource
+    ) {
+        return new ActualizarBonoCommand(
+                bonoId,
                 usuarioId,
                 resource.valorNominal(),
                 resource.tasaCupon(),
