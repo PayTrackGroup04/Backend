@@ -8,21 +8,25 @@ import com.paytrack.bonos.domain.model.valueobjects.TasaInteres;
 import com.paytrack.bonos.interfaces.rest.resources.CrearBonoResource;
 
 public class CrearBonoCommandFromResourceAssembler {
-    public static CrearBonoCommand toCommandFromResource(CrearBonoResource resource, Long usuarioid) {
+
+    public static CrearBonoCommand toCommandFromResource(CrearBonoResource resource, Long usuarioId) {
         return new CrearBonoCommand(
-                new Dinero(resource.precioVentaMonto(), resource.precioVentaMoneda()),
-                resource.porcentajeCuotaInicial(),
-                new Dinero(resource.prestamoMonto(), resource.prestamoMoneda()),
+                usuarioId,
+                resource.valorNominal(),
+                resource.tasaCupon(),
+                resource.tipoTasa(),
+                resource.capitalizacion(),
                 resource.frecuenciaPago(),
-                new PeriodoTiempo(resource.plazoValor(), resource.plazoUnidad()),
-                new TasaInteres(resource.tea()),
-                resource.numeroPeriodos(),
-                new PlazoGracia(
-                        resource.tipoPlazoGracia(),
-                        new PeriodoTiempo(resource.duracionGraciaValor(), resource.duracionGraciaUnidad())
-                ),
-                resource.fechaInicio(),
-                usuarioid
+                resource.plazoAnios(),
+                resource.graciaTotal(),
+                resource.graciaParcial(),
+                resource.fechaEmision(),
+                resource.numeroDiasPorAno(),
+                resource.cavali(),
+                resource.estructuracion(),
+                resource.colocacion(),
+                resource.metodoAmortizacion(),
+                resource.moneda()
         );
     }
 }

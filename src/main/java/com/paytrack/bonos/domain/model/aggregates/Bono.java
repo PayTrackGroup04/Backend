@@ -13,114 +13,110 @@ public class Bono {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "usuario_id", nullable = false)
+    @Column(nullable = false)
     private Long usuarioId;
 
-    @Embedded
-    private Dinero precioVenta;
+    @Column(nullable = false)
+    private BigDecimal valorNominal;
 
-    private BigDecimal porcentajeCuotaInicial;
-
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "monto", column = @Column(name = "monto_prestamo")),
-            @AttributeOverride(name = "moneda", column = @Column(name = "moneda_prestamo"))
-    })
-    private Dinero prestamo;
+    @Column(nullable = false)
+    private BigDecimal tasaCupon;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoTasa tipoTasa;
+
+    @Enumerated(EnumType.STRING)
+    private Capitalizacion capitalizacion;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private FrecuenciaPago frecuenciaPago;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "valor", column = @Column(name = "plazo_valor")),
-            @AttributeOverride(name = "unidad", column = @Column(name = "plazo_unidad"))
-    })
-    private PeriodoTiempo plazo;
+    @Column(nullable = false)
+    private int plazoAnios;
 
-    @Embedded
-    private TasaInteres tea;
+    @Column(nullable = false)
+    private int graciaTotal;
 
-    private int numeroPeriodos;
+    @Column(nullable = false)
+    private int graciaParcial;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "duracion.valor", column = @Column(name = "gracia_valor")),
-            @AttributeOverride(name = "duracion.unidad", column = @Column(name = "gracia_unidad")),
-            @AttributeOverride(name = "tipo", column = @Column(name = "gracia_tipo"))
-    })
-    private PlazoGracia plazoGracia;
+    @Column(nullable = false)
+    private LocalDate fechaEmision;
 
-    private LocalDate fechaInicio;
+    @Column(nullable = false)
+    private int numeroDiasPorAno;
+
+    @Column(nullable = false)
+    private BigDecimal cavali;
+
+    @Column(nullable = false)
+    private BigDecimal estructuracion;
+
+    @Column(nullable = false)
+    private BigDecimal colocacion;
+
+    @Enumerated(EnumType.STRING)
+    private MetodoAmortizacion metodoAmortizacion;
+
+    @Enumerated(EnumType.STRING)
+    private TipoMoneda moneda;
 
     public Bono() {}
 
     public Bono(
-            Dinero precioVenta,
-            BigDecimal porcentajeCuotaInicial,
-            Dinero prestamo,
+            Long usuarioId,
+            BigDecimal valorNominal,
+            BigDecimal tasaCupon,
+            TipoTasa tipoTasa,
+            Capitalizacion capitalizacion,
             FrecuenciaPago frecuenciaPago,
-            PeriodoTiempo plazo,
-            TasaInteres tea,
-            int numeroPeriodos,
-            PlazoGracia plazoGracia,
-            LocalDate fechaInicio,
-            Long usuarioId
+            int plazoAnios,
+            int graciaTotal,
+            int graciaParcial,
+            LocalDate fechaEmision,
+            int numeroDiasPorAno,
+            BigDecimal cavali,
+            BigDecimal estructuracion,
+            BigDecimal colocacion,
+            MetodoAmortizacion metodoAmortizacion,
+            TipoMoneda moneda
     ) {
-        this.precioVenta = precioVenta;
-        this.porcentajeCuotaInicial = porcentajeCuotaInicial;
-        this.prestamo = prestamo;
-        this.frecuenciaPago = frecuenciaPago;
-        this.plazo = plazo;
-        this.tea = tea;
-        this.numeroPeriodos = numeroPeriodos;
-        this.plazoGracia = plazoGracia;
-        this.fechaInicio = fechaInicio;
         this.usuarioId = usuarioId;
+        this.valorNominal = valorNominal;
+        this.tasaCupon = tasaCupon;
+        this.tipoTasa = tipoTasa;
+        this.capitalizacion = capitalizacion;
+        this.frecuenciaPago = frecuenciaPago;
+        this.plazoAnios = plazoAnios;
+        this.graciaTotal = graciaTotal;
+        this.graciaParcial = graciaParcial;
+        this.fechaEmision = fechaEmision;
+        this.numeroDiasPorAno = numeroDiasPorAno;
+        this.cavali = cavali;
+        this.estructuracion = estructuracion;
+        this.colocacion = colocacion;
+        this.metodoAmortizacion = metodoAmortizacion;
+        this.moneda = moneda;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Dinero getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public BigDecimal getPorcentajeCuotaInicial() {
-        return porcentajeCuotaInicial;
-    }
-
-    public Dinero getPrestamo() {
-        return prestamo;
-    }
-
-    public FrecuenciaPago getFrecuenciaPago() {
-        return frecuenciaPago;
-    }
-
-    public PeriodoTiempo getPlazo() {
-        return plazo;
-    }
-
-    public TasaInteres getTea() {
-        return tea;
-    }
-
-    public int getNumeroPeriodos() {
-        return numeroPeriodos;
-    }
-
-    public PlazoGracia getPlazoGracia() {
-        return plazoGracia;
-    }
-
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public Long getUsuarioId() {
-        return usuarioId;
-    }
-
+    // Getters
+    public Long getId() { return id; }
+    public Long getUsuarioId() { return usuarioId; }
+    public BigDecimal getValorNominal() { return valorNominal; }
+    public BigDecimal getTasaCupon() { return tasaCupon; }
+    public TipoTasa getTipoTasa() { return tipoTasa; }
+    public Capitalizacion getCapitalizacion() { return capitalizacion; }
+    public FrecuenciaPago getFrecuenciaPago() { return frecuenciaPago; }
+    public int getPlazoAnios() { return plazoAnios; }
+    public int getGraciaTotal() { return graciaTotal; }
+    public int getGraciaParcial() { return graciaParcial; }
+    public LocalDate getFechaEmision() { return fechaEmision; }
+    public int getNumeroDiasPorAno() { return numeroDiasPorAno; }
+    public BigDecimal getCavali() { return cavali; }
+    public BigDecimal getEstructuracion() { return estructuracion; }
+    public BigDecimal getColocacion() { return colocacion; }
+    public MetodoAmortizacion getMetodoAmortizacion() { return metodoAmortizacion; }
+    public TipoMoneda getMoneda() { return moneda; }
 }

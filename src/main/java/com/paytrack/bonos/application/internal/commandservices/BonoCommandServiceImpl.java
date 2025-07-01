@@ -20,20 +20,25 @@ public class BonoCommandServiceImpl implements BonoCommandService {
     @Override
     public Optional<Bono> handle(CrearBonoCommand command) {
         Bono bono = new Bono(
-                command.precioVenta(),
-                command.porcentajeCuotaInicial(),
-                command.prestamo(),
+                command.usuarioId(),
+                command.valorNominal(),
+                command.tasaCupon(),
+                command.tipoTasa(),
+                command.capitalizacion(),
                 command.frecuenciaPago(),
-                command.plazo(),
-                command.tea(),
-                command.numeroPeriodos(),
-                command.plazoGracia(),
-                command.fechaInicio(),
-                command.usuarioId()
+                command.plazoAnios(),
+                command.graciaTotal(),
+                command.graciaParcial(),
+                command.fechaEmision(),
+                command.numeroDiasPorAno(),
+                command.cavali(),
+                command.estructuracion(),
+                command.colocacion(),
+                command.metodoAmortizacion(),
+                command.moneda()
         );
-
-        Bono guardado = bonoRepository.save(bono);
-        return Optional.of(guardado);
+        Bono savedBono = bonoRepository.save(bono);
+        return Optional.of(savedBono);
     }
 
 }
