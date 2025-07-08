@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/bonos")
+@RequestMapping("/api/v1/bonos")
 public class BonoController {
 
     private final BonoCommandService bonoCommandService;
@@ -30,18 +30,18 @@ public class BonoController {
     }
 
 
-    // Crear bono
-    //@PostMapping
-    //public ResponseEntity<BonoResource> crear(@RequestBody CrearBonoResource resource) {
-    //    var command = CrearBonoCommandFromResourceAssembler.toCommandFromResource(resource);
-    //    Optional<Bono> resultado = bonoCommandService.handle(command);
-//
-    //    return resultado
-    //            .map(BonoResourceFromEntityAssembler::toResourceFromEntity)
-    //            .map(ResponseEntity::ok)
-    //            .orElse(ResponseEntity.badRequest().build());
-    //}
-//
+    //Crear bono
+    /**@PostMapping
+    public ResponseEntity<BonoResource> crear(@RequestBody CrearBonoResource resource) {
+        var command = CrearBonoCommandFromResourceAssembler.toCommandFromResource(resource);
+        Optional<Bono> resultado = bonoCommandService.handle(command);
+
+        return resultado
+                .map(BonoResourceFromEntityAssembler::toResourceFromEntity)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.badRequest().build());
+    }**/
+
     @PostMapping
     public ResponseEntity<BonoResource> crear(
             @RequestBody CrearBonoResource resource,
